@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+    <env:Header/>
+    <env:Body><stuf:Bv03Bericht xmlns:stuf="http://www.egem.nl/StUF/StUF0301" xmlns:soap="http://www.emaxx.org/core/soap">
+<stuf:stuurgegevens>
+<stuf:berichtcode>Bv03</stuf:berichtcode>
+<stuf:zender>
+<stuf:organisatie>Gemeente Test</stuf:organisatie>
+<stuf:applicatie>UITSTEKEND</stuf:applicatie>
+</stuf:zender>
+<stuf:ontvanger>
+<stuf:organisatie>Gemeente Test</stuf:organisatie>
+<stuf:applicatie>SIGNALEN</stuf:applicatie>
+</stuf:ontvanger>
+<stuf:referentienummer>e08a6e8c-3ddd-4e66-940e-b7f0006d44ff</stuf:referentienummer>
+<stuf:tijdstipBericht>20221020115735386</stuf:tijdstipBericht>
+<stuf:crossRefnummer>37fc81ee-7365-4438-97db-e5f5964d7f64</stuf:crossRefnummer>
+</stuf:stuurgegevens>
+</stuf:Bv03Bericht>
+</env:Body>
+</env:Envelope>

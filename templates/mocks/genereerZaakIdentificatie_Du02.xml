@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+<env:Header/>
+<env:Body><zkn:genereerZaakIdentificatie_Du02 xmlns:zkn="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:stuf="http://www.egem.nl/StUF/StUF0301" xmlns:gml="http://www.opengis.net/gml">
+<zkn:stuurgegevens>
+<stuf:berichtcode xmlns:soap="http://www.emaxx.org/core/soap">Du02</stuf:berichtcode>
+<stuf:zender xmlns:soap="http://www.emaxx.org/core/soap">
+<stuf:organisatie>Gemeente Test</stuf:organisatie>
+<stuf:applicatie>UITSTEKEND</stuf:applicatie>
+</stuf:zender>
+<stuf:ontvanger xmlns:soap="http://www.emaxx.org/core/soap">
+<stuf:organisatie>Gemeente Test</stuf:organisatie>
+<stuf:applicatie>SIGNALEN</stuf:applicatie>
+</stuf:ontvanger>
+<stuf:referentienummer xmlns:soap="http://www.emaxx.org/core/soap">824acce8-c774-4ee2-852e-a207272dbfa7</stuf:referentienummer>
+<stuf:tijdstipBericht xmlns:soap="http://www.emaxx.org/core/soap">20221019221843116</stuf:tijdstipBericht>
+<stuf:crossRefnummer xmlns:soap="http://www.emaxx.org/core/soap">5875dc69-8500-4ab7-813d-7a87ed49dd4b</stuf:crossRefnummer>
+<stuf:functie xmlns:soap="http://www.emaxx.org/core/soap">genereerZaakidentificatie</stuf:functie>
+</zkn:stuurgegevens>
+<zkn:zaak stuf:functie="entiteit" stuf:entiteittype="ZAK">
+<zkn:identificatie>{{ generated_id }}</zkn:identificatie>
+</zkn:zaak>
+</zkn:genereerZaakIdentificatie_Du02>
+</env:Body>
+</env:Envelope>
