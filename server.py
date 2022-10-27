@@ -1,5 +1,6 @@
 from datetime import datetime
 import base64
+import binascii
 import re
 import uuid
 from urllib.parse import urljoin
@@ -9,6 +10,7 @@ from requests.exceptions import JSONDecodeError
 import json
 import xmltodict
 from xml.parsers.expat import ExpatError
+from lxml import etree
 from lib import GenereerZaakIdentificatieMessage, CreerZaakMessage, ActualiseerZaakStatusMessage, OntvangstbevestigingBv03, is_valid_email
 
 app = Flask(__name__)
@@ -179,7 +181,7 @@ def buitenbeter():
         url = urljoin(app.config['SIGNALEN_ENDPOINT'], f'/signals/v1/public/signals/{signal_id}/attachments/')
         response = requests.post(url, data=data, files=files, headers=app.config['ADDITIONAL_SIGNALEN_HEADERS'])
         if not response.ok:
-            print('Could not create attachment in Signalen: ', response.text)
+            app.logger.info(f'Could not create attachment in Signalen: {response.text}')
             return 'Could not create attachment in Signalen', 400
 
         attachment_data = response.json()
@@ -202,6 +204,7 @@ def zaken():
     )
 
     result = message.send(app.config['ZDS_ENDPOINT'], app.config['ADDITIONAL_ZDS_HEADERS'])
+    app.logger.info(f'GenereerZaakIdentificatieMessage. Received: {etree.tostring(result)}')
 
     nsmap_soap = {
         'soap': 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -229,6 +232,7 @@ def zaken():
     )
 
     result = message.send(app.config['ZDS_ENDPOINT'], app.config['ADDITIONAL_ZDS_HEADERS'])
+    app.logger.info(f'CreerZaakMessage. Received: {etree.tostring(result)}')
 
     return {
         'url': f'{request.base_url}/{identificatie}',
@@ -258,7 +262,8 @@ def statussen():
         statustype_omschrijving=app.config['ZDS_STATUSTYPES'][statustype]['omschrijving'],
     )
 
-    message.send(app.config['ZDS_ENDPOINT'], app.config['ADDITIONAL_ZDS_HEADERS'])
+    result = message.send(app.config['ZDS_ENDPOINT'], app.config['ADDITIONAL_ZDS_HEADERS'])
+    app.logger.info(f'ActualiseerZaakStatusMessage. Received: {etree.tostring(result)}')
 
     return {
         'url': f'{request.base_url}/{statustype}',
