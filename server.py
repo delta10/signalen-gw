@@ -1,6 +1,7 @@
 from datetime import datetime
 import base64
 import binascii
+import os
 import re
 import uuid
 from urllib.parse import urljoin
@@ -15,6 +16,7 @@ from lib import GenereerZaakIdentificatieMessage, CreerZaakMessage, ActualiseerZ
 
 app = Flask(__name__)
 app.config.from_object('settings')
+app.logger.setLevel(os.getenv('LOG_LEVEL', 'ERROR'))
 
 @app.route('/')
 def index():
