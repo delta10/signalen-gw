@@ -46,7 +46,7 @@ class Message:
             'SOAPAction': self.SOAP_ACTION
         }
 
-        response = requests.post(endpoint, self.tostring(), headers={ **headers, **additional_headers })
+        response = requests.post(endpoint, self.tostring(), headers={ **headers, **additional_headers }, timeout=10)
         response.raise_for_status()
 
         return etree.fromstring(response.content)

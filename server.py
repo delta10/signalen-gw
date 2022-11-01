@@ -116,7 +116,7 @@ def buitenbeter():
     }
 
     url = urljoin(app.config['SIGNALEN_ENDPOINT'], '/signals/category/prediction')
-    response = requests.post(url, data=json.dumps(data), headers={ **headers, **app.config['ADDITIONAL_SIGNALEN_HEADERS'] })
+    response = requests.post(url, data=json.dumps(data), headers={ **headers, **app.config['ADDITIONAL_SIGNALEN_HEADERS'] }, timeout=10)
 
     sub_category = urljoin(app.config['SIGNALEN_ENDPOINT'], '/signals/v1/public/terms/categories/overig/sub_categories/overig')
 
@@ -153,7 +153,7 @@ def buitenbeter():
     }
 
     url = urljoin(app.config['SIGNALEN_ENDPOINT'], '/signals/v1/private/signals/')
-    response = requests.post(url, data=json.dumps(data), headers={ **headers, **app.config['ADDITIONAL_SIGNALEN_HEADERS'] })
+    response = requests.post(url, data=json.dumps(data), headers={ **headers, **app.config['ADDITIONAL_SIGNALEN_HEADERS'] }, timeout=10)
 
     signal_data = response.json()
     signal_id = signal_data.get('signal_id')
@@ -182,7 +182,7 @@ def buitenbeter():
 
 
         url = urljoin(app.config['SIGNALEN_ENDPOINT'], f'/signals/v1/public/signals/{signal_id}/attachments/')
-        response = requests.post(url, data=data, files=files, headers=app.config['ADDITIONAL_SIGNALEN_HEADERS'])
+        response = requests.post(url, data=data, files=files, headers=app.config['ADDITIONAL_SIGNALEN_HEADERS'], timeout=10)
         if not response.ok:
             app.logger.info(f'Could not create attachment in Signalen: {response.text}')
             return 'Could not create attachment in Signalen', 400
